@@ -11,6 +11,6 @@ void venderethereum(void);
 
 extern double ripple;
 void comprarripple(void);
-void venderripple(void):
+void venderripple(void);
 
 #endif
