@@ -1,3 +1,5 @@
+// Tá dando erro pq os valores não tão completos ainda, vai ser arrumado com o tempo (erro no valorcompra e %lf)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "Transações.h"
@@ -11,7 +13,7 @@ float precobitcoin, precoethereum, precoripple;
 // COMPRAS
 
 int comprabitcoin(){
-    double valorcompra = 0
+    double valorcompra = 0;
     printf("Você possui R$%lf \nQuantos BTC deseja comprar? \n", saldo);
     scanf("%lf" &valorcompra);
     if (valorcompra>0 && valorcompra<=saldo){
@@ -23,7 +25,7 @@ int comprabitcoin(){
 }
 
 int comprarethereum(void){
-    double valorcompra = 0
+    double valorcompra = 0;
     printf("Você possui R$%lf \nQuantos ethereum deseja comprar? \n", saldo);
     scanf("%lf" &valorcompra);
     if (valorcompra>0 && valorcompra<=saldo){
@@ -35,7 +37,7 @@ int comprarethereum(void){
 }
 
 int compraripple(void){
-    double valorcompra = 0
+    double valorcompra = 0;
     printf("Você possui R$%lf \nQuantos ripple deseja comprar? \n", saldo);
     scanf("%lf" &valorcompra);
     if (valorcompra>0 && valorcompra<=saldo){
@@ -49,7 +51,7 @@ int compraripple(void){
 // VENDAS
 
 int vendabitcoin(void){
-    double valorvenda = 0
+    double valorvenda = 0;
     printf("Você possui %lf bitcoins \nQuantos bitcoins deseja vender? \n", bitcoin);
     scanf("lf" &valorvenda);
     if (valorvenda>0 && valorvenda<=bitcoin){
