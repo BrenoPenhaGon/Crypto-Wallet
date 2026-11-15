@@ -36,8 +36,7 @@ int conferirDigitos(const char *s){
 void cadastrarUsuario(){
     char cpf[13] = "";
     char nome[50];
-    char senha[50];
-    int valida = 1;
+    char senha[8];
     // int id;
 
     while (strlen(cpf) != 11 || conferirDigitos(cpf) == 0){
@@ -86,11 +85,40 @@ void cadastrarUsuario(){
     // Conferir se abriu direito
     if (arquivo == NULL){
         printf("Deu ruim fi");
+        return;
     }
 
     // Manda nome e senha pro arquivo
     fprintf(arquivo, "%s;%s;%s\n", cpf, nome, senha);
     fclose(arquivo);
 
-    system("pause");
+    printf("Cadastro Realizado!\n");
+}
+
+int logarUsuario(Usuario *u){
+    char cpf[13] = "";
+    char nome [50];
+    char senha[8] = "";
+    char linha [100];
+    char Arqcpf[12], Arqnome[50], Arqsenha[7];
+    FILE *arquivo;
+
+    while(1){
+        printf("Informe seu CPF sem pontos e sem tracos: \n");
+        fgets(cpf, sizeof(cpf), stdin);
+        if(strchr(cpf, "\n") == NULL){
+            limparBuffer();
+            cpf[0] = '\0';
+        } else{
+            cpf[strcspn(cpf, "\n")] = '\0';  
+        }
+        // VAI SERVIR PRA AMBOS
+        fopen("users.txt", "r");
+        while (fgets(linha, sizeof(linha), arquivo) != NULL){
+            sscanf(linha, "%11[^;];%49[^;];%6[^;]", Arqcpf, Arqnome, Arqsenha);
+
+        }
+
+        printf("Informe sua senha: \n");
+    }
 }
