@@ -1,9 +1,11 @@
+#include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "cadastro.h"
 
 int main() 
 {
+	setlocale(LC_ALL, "Portuguese");
 	int acao;
 	printf("----SEJA BEM VINDO AO MERCADO DE CRIPTOMOEDAS----\n");
 
@@ -11,6 +13,7 @@ int main()
 		"2 - Login\n" 
 		"3 - Sair\n");
 	scanf("%d", &acao);
+	limparBuffer();
 
 	if(acao == 3){
 		system("pause");

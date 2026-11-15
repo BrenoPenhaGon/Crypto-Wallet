@@ -1,32 +1,85 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #include "Cadastro.h"
 
-int gerarid(){
-    FILE *arquivo;
-    char linha[100];
-    int contador = 0, id;
+// int gerarid(){
+//     FILE *arquivo;
+//     char linha[100];
+//     int contador = 0, id;
 
-    arquivo = fopen("users.txt", "r");
-    while (fgets(linha, sizeof(linha), arquivo) !=NULL){
-        contador++;
+//     arquivo = fopen("users.txt", "r");
+//     while (fgets(linha, sizeof(linha), arquivo) !=NULL){
+//         contador++;
+//     }
+//     id = contador+1;
+//     fclose(arquivo);
+//     return id;
+// }
+
+void limparBuffer(){
+    int a;
+    while ((a = getchar()) != '\n' && a != EOF);
+}
+
+int conferirDigitos(const char *s){
+    int i;
+    for (i = 0; i < strlen(s); i++){
+        if (isdigit((unsigned char)s[i]) == 0){
+        return 0;
+        }
     }
-    id = contador+1;
-    fclose(arquivo);
-    return id;
+    return 1;
 }
 
 void cadastrarUsuario(){
+    char cpf[13] = "";
     char nome[50];
     char senha[50];
-    int id;
+    int valida = 1;
+    // int id;
 
+    while (strlen(cpf) != 11 || conferirDigitos(cpf) == 0){
+        printf("Informe seu CPF sem pontos e sem tracos: \n");
+        fgets(cpf, sizeof(cpf), stdin);
+        // Corrige o erro que da se exceder a quantidade de caracteres do char, 
+        // basicamente vai conferir se digitaram excedentes, 
+        // limpar o buffer e descarta o resto da linha.
+        // Depois zera a string cpf pro resto não passar como valido
+        if(strchr(cpf, '\n') == NULL){ 
+            limparBuffer();
+            cpf[0] = '\0';
+        } else{
+            cpf[strcspn(cpf, "\n")] = '\0';  
+        }
 
-    printf("Informe seu usuário: \n");
-    scanf("%49s", nome);
-    printf("Informe a senha: \n");
-    scanf("%49s", senha);
-    id = gerarid();
+        if (strlen(cpf) != 11 || conferirDigitos(cpf) == 0){
+            printf("CPF invalida\n");
+        }
+    }
+
+    printf("Informe seu nome: \n");
+    fgets(nome, sizeof(nome), stdin);
+    nome[strcspn(nome, "\n")] = '\0';
+
+    while (strlen(senha) != 6 || conferirDigitos(senha) == 0){
+        printf("Informe a senha: \n");
+        fgets(senha, sizeof(senha), stdin);
+        if(strchr(senha, '\n') == NULL){
+            limparBuffer();
+            senha[0] = '\0';
+        }else{
+            senha[strcspn(senha, "\n")] = '\0';
+        }
+        if(strlen(senha) != 6 || conferirDigitos(senha) == 0){
+            printf("Senha invalida\n");
+        }
+    }
+
+    
+
+    // id = gerarid();
 
     FILE *arquivo = fopen("users.txt", "a");
 
@@ -36,7 +89,7 @@ void cadastrarUsuario(){
     }
 
     // Manda nome e senha pro arquivo
-    fprintf(arquivo, "%04d;%s;%s\n", id, nome, senha);
+    fprintf(arquivo, "%s;%s;%s\n", cpf, nome, senha);
     fclose(arquivo);
 
     system("pause");

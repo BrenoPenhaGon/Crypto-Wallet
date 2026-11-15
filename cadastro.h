@@ -2,5 +2,6 @@
 #define CADASTRO_H
 
 void cadastrarUsuario(void);
+void limparBuffer(void);
 
 #endif
