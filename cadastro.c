@@ -97,7 +97,6 @@ void cadastrarUsuario(){
 
 int logarUsuario(Usuario *u){
     char cpf[13] = "";
-    char nome [50];
     char senha[8] = "";
     char linha [100];
     char Arqcpf[12], Arqnome[50], Arqsenha[7];
