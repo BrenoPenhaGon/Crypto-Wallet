@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "Cadastro.h"
+#include "cadastro.h"
 
 // int gerarid(){
 //     FILE *arquivo;
@@ -36,7 +36,7 @@ int conferirDigitos(const char *s){
 void cadastrarUsuario(){
     char cpf[13] = "";
     char nome[50];
-    char senha[8];
+    char senha[8] = "";
     // int id;
 
     while (strlen(cpf) != 11 || conferirDigitos(cpf) == 0){
@@ -100,24 +100,55 @@ int logarUsuario(Usuario *u){
     char senha[8] = "";
     char linha [100];
     char Arqcpf[12], Arqnome[50], Arqsenha[7];
+    int tentativas = 0;
     FILE *arquivo;
 
-    while(1){
+    while(tentativas < 3){
         printf("Informe seu CPF sem pontos e sem tracos: \n");
         fgets(cpf, sizeof(cpf), stdin);
-        if(strchr(cpf, "\n") == NULL){
+        if(strchr(cpf, '\n') == NULL){
             limparBuffer();
             cpf[0] = '\0';
         } else{
             cpf[strcspn(cpf, "\n")] = '\0';  
         }
-        // VAI SERVIR PRA AMBOS
-        fopen("users.txt", "r");
-        while (fgets(linha, sizeof(linha), arquivo) != NULL){
-            sscanf(linha, "%11[^;];%49[^;];%6[^;]", Arqcpf, Arqnome, Arqsenha);
 
+        printf("Informe a senha: \n");
+        fgets(senha, sizeof(senha), stdin);
+        if(strchr(senha, '\n') == NULL){
+            limparBuffer();
+            senha[0] = '\0';
+        } else{
+            senha[strcspn(senha, "\n")] = '\0';
         }
 
-        printf("Informe sua senha: \n");
+        arquivo = fopen("users.txt", "r");
+        // if(arquivo == NULL){
+        //     printf("Nenhum usuario cadastrado.\n");
+        //     return 0;
+        // }
+
+        // SERVE PRA TODOS
+        while (fgets(linha, sizeof(linha), arquivo) != NULL){
+            linha[strcspn(linha, "\n")] = '\0';
+
+            if (sscanf(linha, "%11[^;];%49[^;];%6[^;]", Arqcpf, Arqnome, Arqsenha) != 3){
+                continue;
+            }
+            
+            if(strcmp(Arqcpf, cpf) == 0 && strcmp(Arqsenha, senha) == 0){
+                strcpy(u->cpf, Arqcpf);
+                strcpy(u->nome, Arqnome);
+                strcpy(u->senha, Arqsenha);
+                fclose(arquivo);
+                return 1;
+            }
+        }
+
+        fclose(arquivo);
+        printf("CPF ou senha incorretos\n");
+        tentativas++;
     }
+    printf("Numero maximo de tentativas atingido. \n");
+    return 0;
 }

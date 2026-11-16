@@ -7,6 +7,8 @@ int main()
 {
 	setlocale(LC_ALL, "Portuguese");
 	int acao;
+	Usuario logado;
+
 	while(1){
 		printf("----SEJA BEM VINDO AO MERCADO DE CRIPTOMOEDAS----\n");
 
@@ -26,15 +28,14 @@ int main()
 		}
 		else if(acao == 2){
 			// aqui vai a função de login
-			break;
+			if(logarUsuario(&logado)){
+				printf("Seja bem vindo %s\n", logado.nome);
+				//MENU COMPLETO
+			}
 		} else{
 			printf("Opcao invalida, tente novamente!");
 		}
 	}
-	// é pra ele ser jogado aqui dps da função login ser usada
-	printf("Seja bem vindo %s");
-
-
 
 	system("pause");
 
