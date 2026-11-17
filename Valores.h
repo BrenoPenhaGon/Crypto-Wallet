@@ -1,20 +1,18 @@
 #ifndef VALORES_H
 #define VALORES_H
 
-extern float precobitcoin;
+extern double precobitcoin;
 void rerollbitcoin(void);
 
-extern float precoethereum;
+extern double precoethereum;
 void rerollethereum(void);
 
-extern float precoripple;
+extern double precoripple;
 void rerollripple(void);
 
 void carrecarCotacoes(void);
 void salvarCotacoes(void);
 void mostrarCotacoes(void);
 void atualizarCotacoes(void);
-
-
 
 #endif
