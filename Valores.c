@@ -60,22 +60,21 @@ void mostrarCotacoes(void){
 }
 
 void rerollbitcoin(void){
-    double variar = ((rand() % 1001) / 1000) * 0.10 - 0.05;
+    double variar = ((rand() % 1001) / 1000.0) * 0.10 - 0.05;
     precobitcoin = precobitcoin * (1 + variar);
 }
 
 void rerollethereum(void){
-    double variar = ((rand() % 1001) / 1000) * 0.10 - 0.05;
+    double variar = ((rand() % 1001) / 1000.0) * 0.10 - 0.05;
     precoethereum = precoethereum * (1 + variar);
 }
 
 void rerollripple(void){
-    double variar = ((rand() % 1001) / 1000) * 0.10 - 0.05;
+    double variar = ((rand() % 1001) / 1000.0) * 0.10 - 0.05;
     precoripple = precoripple * (1 + variar);
 }
 
 void atualizarCotacoes(void){
-    carregarCotacoes();
     rerollbitcoin();
     rerollethereum();
     rerollripple();

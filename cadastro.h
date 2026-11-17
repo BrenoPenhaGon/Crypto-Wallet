@@ -5,7 +5,11 @@ typedef struct{
     char cpf[12];
     char nome[50];
     char senha[7];
-    // Futuramente adicionar reais, btc, eth, xrp
+    // Futuramente adicionar reais, btc, eth, xrp 
+    double reais;
+    double bitcoin;
+    double ethereum;
+    double ripple;
 } Usuario;
 
 // 1 se logar, 0 se der red

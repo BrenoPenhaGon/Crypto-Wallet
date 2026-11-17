@@ -121,12 +121,8 @@ int logarUsuario(Usuario *u){
         } else{
             senha[strcspn(senha, "\n")] = '\0';
         }
-
+        
         arquivo = fopen("users.txt", "r");
-        // if(arquivo == NULL){
-        //     printf("Nenhum usuario cadastrado.\n");
-        //     return 0;
-        // }
 
         // SERVE PRA TODOS
         while (fgets(linha, sizeof(linha), arquivo) != NULL){

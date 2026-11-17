@@ -1,8 +1,10 @@
-#include <locale.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "cadastro.h"
 #include "valores.h"
+#include "saldo.h"
+#include "extrato.h"
+#include "carteira.h"
 
 void menuUsuario(Usuario *u){
 	int opcao = 0;
@@ -21,9 +23,9 @@ void menuUsuario(Usuario *u){
 		limparBuffer();
 
 		if (opcao == 1){
-
+			consultarSaldo(u);
 		} else if(opcao == 2){
-
+			consultarExtrato(u);
 		} else if(opcao == 3){
 			
 		} else if(opcao == 4){
@@ -44,11 +46,10 @@ void menuUsuario(Usuario *u){
 	}
 }
 
-int main() 
-{
-	setlocale(LC_ALL, "Portuguese");
+int main(){
 	int acao;
 	Usuario logado;
+	carrecarCotacoes();
 
 	while(1){
 		printf("----SEJA BEM VINDO AO MERCADO DE CRIPTOMOEDAS----\n");
@@ -70,6 +71,7 @@ int main()
 		else if(acao == 2){
 			// aqui vai a função de login
 			if(logarUsuario(&logado)){
+				carregarCarteira(&logado);
 				printf("\n----Seja bem vindo %s----", logado.nome);
 				menuUsuario(&logado);
 				//MENU COMPLETO
