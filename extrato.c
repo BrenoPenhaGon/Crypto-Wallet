@@ -43,6 +43,7 @@ void consultarExtrato(const Usuario *u){
     printf("CPF: %.3s.%.3s.%.3s-%.2s\n", u->cpf, u->cpf + 3, u->cpf + 6, u->cpf + 9);
 
     sprintf(localizacao, "dados/extratos/extrato_%s.txt", u->cpf);
+    arquivo = fopen(localizacao, "r");
     if (arquivo == NULL){
         printf("Deu ruim");
         return;

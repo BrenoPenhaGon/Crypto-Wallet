@@ -15,3 +15,10 @@ void consultarSaldo(const Usuario *u){
     printf("Ethereum: %.6f\n", u->ethereum);
     printf("Ripple: %.6f\n", u->ripple);
 }
+
+void mostrarSaldo(const Usuario *u){
+    printf("Reais: %.2f\n", u->reais);
+    printf("Bitcoin: %.6f\n", u->bitcoin);
+    printf("Ethereum: %.6f\n", u->ethereum);
+    printf("Ripple: %.6f\n", u->ripple);
+}

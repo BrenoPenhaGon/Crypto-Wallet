@@ -5,6 +5,7 @@
 #include "saldo.h"
 #include "extrato.h"
 #include "carteira.h"
+#include "Transacoes.h"
 
 void menuUsuario(Usuario *u){
 	int opcao = 0;
@@ -27,17 +28,16 @@ void menuUsuario(Usuario *u){
 		} else if(opcao == 2){
 			consultarExtrato(u);
 		} else if(opcao == 3){
-			
+			depositar(u);
 		} else if(opcao == 4){
-			
+			sacar(u);
 		} else if(opcao == 5){
-			
+			comprar(u);
 		} else if(opcao == 6){
-			
+			vender(u);
 		} else if(opcao == 7){
 			atualizarCotacoes();
 			mostrarCotacoes();
-
 		} else if(opcao == 8){
 			printf("\nAte logo, %s!\n", u->nome);
 		} else{

@@ -4,6 +4,7 @@
 #include "cadastro.h"
 
 void carregarCarteira(Usuario *u);
+void salvarCarteira(const Usuario *u);
 int confirmarSenha(const Usuario *u);
 
 

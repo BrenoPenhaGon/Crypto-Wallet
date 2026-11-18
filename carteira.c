@@ -11,8 +11,9 @@ void carregarCarteira(Usuario *u){
     u->reais = 0;
     u->bitcoin = 0;
     u->ethereum = 0;
+    u->ripple = 0;
 
-    sprintf(localizacao, "dados/carteira/carteira_%s.txt", u->cpf);
+    sprintf(localizacao, "dados/carteiras/carteira_%s.txt", u->cpf);
     arquivo = fopen(localizacao, "r");
     if (arquivo == NULL){
         return;
@@ -25,6 +26,22 @@ void carregarCarteira(Usuario *u){
         u->ethereum = 0;
         u-> ripple = 0;
     }
+}
+
+void salvarCarteira(const Usuario *u){
+    char localizacao[100];
+    FILE *arquivo;
+
+    sprintf(localizacao, "dados/carteiras/carteira_%s.txt", u->cpf);
+    arquivo = fopen(localizacao, "w");
+    if (arquivo == NULL){
+        printf("Deu erro\n");
+        perror(localizacao);
+        return;
+    }
+
+    fprintf(arquivo, "%.6f;%.6f;%.6f;%.6f\n", u->reais, u->bitcoin, u->ethereum, u->ripple);
+    fclose(arquivo);
 }
 
 int confirmarSenha(const Usuario *u){
